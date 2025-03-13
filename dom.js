@@ -1,18 +1,59 @@
-let button = document.querySelector("button");
-let a = document.querySelector("a");
-let input = document.querySelector("input");
+// prototyping
+String.prototype.getMoreData = function () {
+  return { uc: this.toUpperCase(), len: this.length, text: this.toString() };
+};
+let text_1 = "deepak";
+console.log(text_1.getMoreData());
+// this
 
-button.addEventListener("click", function (event) {
-  event.preventDefault();
-  let inputValue = input.value;
-  if (inputValue.trim().length === 0) {
-    alert("Enter Input");
-    return false;
+// constructor function
+function Human(name) {
+  this.name = name;
+}
+
+Human.prototype.printName = function () {
+  console.log(this.name);
+};
+
+Human.prototype.printName_1 = function () {
+  console.log(this.printName());
+};
+
+function Student(name) {
+  Human.call(this, name);
+}
+
+Student.prototype = Object.create(Human.prototype);
+
+let student = new Student('"Deepakkumar"');
+student.printName();
+console.log(student);
+
+let student_1 = {
+  list: [],
+};
+
+let product = {
+  cart: [],
+};
+
+function add(a, b, c, d) {
+  console.log(this);
+}
+
+add.call(student_1, 1, 2, 3, 4);
+add.call(product);
+add.apply(student_1, [1, 2, 3, 4]);
+let newFunction = add.bind(student_1);
+newFunction(1, 2, 3, 4);
+
+class Human_1 {
+  printData() {
+    setTimeout(() => {
+      console.log(this);
+    }, 3000);
   }
-  console.log(`button was clicked`);
-});
+}
 
-a.addEventListener("click", function (event) {
-  event.preventDefault();
-  console.log(`a was clicked`);
-});
+const human = new Human_1();
+human.printData();
