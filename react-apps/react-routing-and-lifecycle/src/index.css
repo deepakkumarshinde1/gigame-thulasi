@@ -1,0 +1,7 @@
+ul > li > a {
+  text-decoration: none;
+}
+
+ul > li > .active {
+  text-decoration: underline;
+}
