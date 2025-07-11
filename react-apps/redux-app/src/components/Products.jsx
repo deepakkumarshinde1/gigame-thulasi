@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../service/products.service";
+import { getProducts, getSingleProduct } from "../redux/products.slice";
 
 function Products() {
   let dispatch = useDispatch();
   let { list } = useSelector((state) => state.myProducts);
 
   useEffect(() => {
-    dispatch(getProducts(1));
+    dispatch(getProducts());
+    dispatch(getSingleProduct(10));
   }, []);
 
   return (
